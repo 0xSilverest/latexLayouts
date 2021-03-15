@@ -1,0 +1,86 @@
+\documentclass[a4paper]{article}
+
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{fontawesome}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage[noframe]{showframe}
+\usepackage{framed}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{csquotes}
+\usepackage[style=verbose-trad2, backend=biber]{biblatex}
+\bibliography{rapport.bib}
+
+\hypersetup{
+     colorlinks=true,
+     linkcolor=black,
+     filecolor=blue,
+     citecolor = black,      
+     urlcolor=blue,
+}
+
+\geometry{
+    paper=a4paper,
+    top=2.5cm,
+    bottom=3cm,
+    left=2.5cm,
+    right=2.5cm,
+    headheight=14pt,
+    footskip=1.5cm
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{\thepage}
+
+\renewenvironment{shaded}{%
+  \def\FrameCommand{\fboxsep=\FrameSep \colorbox{shadecolor}}%
+  \MakeFramed{\advance\hsize-\width \FrameRestore\FrameRestore}}%
+ {\endMakeFramed}
+\definecolor{shadecolor}{gray}{0.85}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+
+        %\includegraphics[width=100px]{logoTop.png}
+
+        \vspace*{2cm}
+            
+        \Huge
+        \textbf{Project Title}
+            
+        \vspace{0.5cm}
+        \LARGE
+        Subject
+            
+        \vspace{1.5cm}
+            
+        \textbf{Authors}
+
+        \vspace{0.5cm}
+        \textsf{Department}
+           
+        \vfill        
+
+        \vspace{0.8cm}
+            
+        %\includegraphics[width=400px]{otherLogo.png}                
+    \end{center}
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+\end{document}
