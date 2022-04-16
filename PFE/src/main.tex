@@ -1,0 +1,116 @@
+%! Author = Metougui Taha
+%! Date = 26/02/2022
+
+% Preamble
+\documentclass[11pt]{article}
+
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+
+\renewcommand{\abstractname}{\Large{Acknowledgements}}
+
+% Document
+\begin{document}
+
+    \thispagestyle{empty}
+
+    \begin{titlepage}
+        \begin{center}
+            \includegraphics[width=150px]{images/logoEnsa}
+
+            \vspace*{2cm}
+
+            \Large
+            \textbf{Implementation of industrial standards on a SaaS for an MVP for logistics}
+
+            \vspace{0.5cm}
+            \large
+            \textbf{Metougui Taha}
+
+            \vspace{1.5 cm}
+
+            \textbf{Supervised by:}\\
+            \vspace{0.5cm}
+            \textbf{Pr. Zineb BESRI}\\
+            \vspace{0.5cm}
+            \textbf{Mr. Othman DARRAZ}
+
+            \vspace{0.8 cm}
+        \end{center}
+    \end{titlepage}
+
+    \newpage
+
+    \begin{abstract}
+
+    \end{abstract}
+
+    \newpage
+
+    \section{Acronyms}\label{sec:acronyms}
+    \input{acronyms.tex}
+
+    \newpage
+
+    \tableofcontents
+
+    \newpage
+
+    \section{Introduction}\label{sec:introduction}
+    \input{introduction.tex}
+
+    \section{Context}\label{sec:context}
+
+    \subsection{Host organization}\label{subsec:host-organization}
+    \input{host_organization.tex}
+
+    \newpage
+
+    \section{Assessment of current state}\label{sec:assessment-of-current-state}
+    \subsection{Analysis}\label{subsec:analysis}
+    \input{analysis.tex}
+
+    \subsection{Criticism}\label{subsec:criticism}
+    \input{criticism.tex}
+
+    \subsection{Proposed solution}\label{subsec:solution}
+    \input{solution.tex}
+
+    \newpage
+
+    \section{Business process}\label{sec:business-process}
+    \input{business_process.tex}
+
+    \newpage
+
+    \section{Conceptual model}\label{sec:conceptual-model}
+    \input{conceptual_model.tex}
+
+    \section{Target component Diagram}\label{sec:target-comp}
+    \input{target_comp.tex}
+
+    \newpage
+
+    \section{Implementation}\label{sec:implementation}
+
+    \newpage
+
+    \section{Conclusion}\label{sec:conclusion}
+
+    \newpage
+
+    \section{Appendices}\label{sec:appendices}
+
+    \newpage
+
+    \section{Bibliography}\label{sec:bibliography}
+
+    \bibliography{main}
+    \bibliographystyle{plain}
+
+\end{document}

@@ -12,4 +12,5 @@
 .*.lb
 *.fdb_latexmk
 *.pdf
-
+out
+.idea

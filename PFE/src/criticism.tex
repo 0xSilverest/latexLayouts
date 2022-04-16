@@ -1,0 +1,24 @@
+This already existing solution comes with its own set of problems.
+
+Beginning from the most obvious one we have at hand is the usage of different technologies in
+the backend without any advantage in place for opting to this approach, such as NodeJs and Spring
+Boot, which in the long term affects the maintainability of the solution, as reported by the CTO,
+was developed by a freelancer and went untouched since. So rather than a maintainable solution,
+they opted for a momentary solution to have a PoC.
+While it's only handling the registration process, it would be better if it just migrated to the
+same stack of the whole system. That will allow the reusability of code, as there are already
+implementations for handling the Users Database on the Spring code base, and there is really
+no purpose to separate the systems.
+
+For the databases as of the current solution,
+there are already two databases put in place a MySQL database to deal with any data that relates to users,
+the other is a Redis database to deal with real-time data such as tracking truck entries etc.
+Redis being the database to deal with real-time data, it needs a daily or
+casual cleaning of the database to avoid having to deal with unnecessary data loaded in the real-time DB,
+thus there will be no way to offer KPI and other statistical results, which are always a good selling point
+to clients.
+
+Furthermore, going through the existing code base, the secrets that are credentials are all exposed in the code,
+in terms of industrialization, it means there's a lack of security.
+
+% TODO: Improve on the criticism put in place

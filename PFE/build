@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd src
+pdflatex -halt-on-error -output-directory=../out/ -jobname=rapport main.tex
+cd ..
+
