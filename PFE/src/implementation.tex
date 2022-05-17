@@ -1,4 +1,4 @@
-\subsection {Databases}
+\section {Databases}
 
 For the database we had two subjects to study:
 \begin{itemize}
@@ -6,7 +6,7 @@ For the database we had two subjects to study:
         \item Databases for storing files
     \end{itemize}
 
-\subsubsection {Archival Database}
+\subsection {Archival Database}
 
 So taking the first one, we had to study performance to cost of three solutions and their scalability:
 
@@ -120,7 +120,7 @@ it would take the data each day at 00:00 and archive it from the redis
 database to the DynamoDB while checking that everything was successfully archived
 before cleaning the data from Redis.
 
-\subsubsection {File storage Database}
+\subsection {File storage Database}
 
 For this second database, that is more opted to be used for the storage of files.
 The solution was already known, and was the Amazon S3 service.
@@ -154,9 +154,9 @@ server started in case it doesn't exist.
 So that we can reproduce the same bucket that there was in the dev environment and during
 the  tests.
 
-\subsection {Security and Authentication}
+\section {Security and Authentication}
 
-\subsubsection {Ratelimiting}
+\subsection {Ratelimiting}
 
 Ratelimiting was one interesting aspect for security, as it's a way to prevent the
 server from being flooded with requests. As it could stop DOS attacks, brute force
@@ -197,13 +197,13 @@ And lastly there was the ratelimiting for the login, which was individually hand
 the purpose of limiting the number of login attempts per minute to avoid possibility
 of a dictionnary attack.
 
-\subsubsection {Authentication}
+\subsection {Authentication}
 
 TODO
 
 \newpage
 
-\subsection {Containerization and Deployment}
+\section {Containerization and Deployment}
 
 Before we dive in into the specifics, we first will showcase the final architecture in the ECS, which is below:
 
@@ -220,7 +220,7 @@ Service: the component which manages the tasks.
 
 Container: the image that is running on the task.
 
-\subsubsection {ECS Containerization and secrets}
+\subsection {ECS Containerization and secrets}
 
 The ECS solution was a bit of a challenge to get it to work,
 as it was a containerized solution, and not a native one.
@@ -254,7 +254,7 @@ Finally we came up with the following solution, which is as follows:
 
 As such we managed to pass aws credentials, google credentials and Redis Labs credentials.
 
-\subsubsection {Load Balancer and routing}
+\subsection {Load Balancer and routing}
 
 As shown in the ECS Architecture, we had a load balancer in front of the running tasks, which has four main goals:
 
@@ -312,7 +312,7 @@ And as most the back-end services relying heavily on the memory, we ensured to p
 memory usage limit on the containers before spawning new instances to handle the load, in
 case of autoscaling by memory.
 
-\subsubsection{Deployment}
+\subsection{Deployment}
 
 Finally after testing everything, and having deployed one ECS service succesfully, we had
 to automate the deployment process, so that we could handle new versions and code update
@@ -335,9 +335,9 @@ and this was done through a bash script that took in charge of getting a list
 of the running tasks, then stopping one of them, and wait for a new one to spawn 
 such as to avoid down time during the update of the service.
 
-\subsection {Refactoring and Improvements}
+\section {Refactoring and Improvements}
 
-\subsubsection {Adding a user management system}
+\subsection {Adding a user management system}
 
 The old system didn't have a user management system, as it relied on the site being the
 user so there wasn't really users to manage. So we had to integrate users within the system

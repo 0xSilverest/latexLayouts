@@ -2,17 +2,20 @@
 %! Date = 26/02/2022
 
 % Preamble
-\documentclass[11pt]{article}
+\documentclass[11pt]{book}
 
 \usepackage{graphicx}
-\usepackage{geometry}
+\usepackage[paper = a4paper,
+			twoside,
+			bindingoffset = 2mm,
+			hmargin = 25mm,
+			vmargin = 25mm,
+			dvipdfm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
-
-\renewcommand{\abstractname}{\Large{Acknowledgements}}
 
 % Document
 \begin{document}
@@ -44,46 +47,36 @@
         \end{center}
     \end{titlepage}
 
-    \newpage
+    \frontmatter
 
-    \begin{abstract}
+    \chapter*{Abstract}
 
-    \end{abstract}
-
-    \newpage
-
-    \section{Acronyms}\label{sec:acronyms}
+    \chapter*{Acronyms}\label{sec:acronyms}
     \input{acronyms.tex}
-
-    \newpage
 
     \tableofcontents
 
-    \newpage
+    \mainmatter
 
-    \section{Introduction}\label{sec:introduction}
+    \chapter{General Introduction}\label{sec:introduction}
+    \input{general_introduction.tex}
+
+    \chapter{Context}\label{sec:context}
     \input{introduction.tex}
 
-    \section{Context}\label{sec:context}
-
-    \subsection{Host organism}\label{subsec:host-organization}
+    \section{Host organism}\label{sec:host-organization}
     \input{host_organization.tex}
 
-    \newpage
-
-    \section{Assessment of current state}\label{sec:assessment-of-current-state}
-    \subsection{Analysis}\label{subsec:analysis}
+    \chapter{Assessment of current state}\label{sec:assessment-of-current-state}
+    \section{Analysis}\label{sec:analysis}
     \input{analysis.tex}
 
-    \subsection{Criticism}\label{subsec:criticism}
+    \section{Criticism}\label{sec:criticism}
     \input{criticism.tex}
 
-    \newpage
-
+    \chapter{Contributions}
     \section{Business process}\label{sec:business-process}
     \input{business_process.tex}
-
-    \newpage
 
     \section{Conceptual model}\label{sec:conceptual-model}
     \input{conceptual_model.tex}
@@ -91,24 +84,18 @@
     \section{Target}\label{sec:target-comp}
     \input{target_comp.tex}
 
-    \newpage
-
-    \section{Implementation}\label{sec:implementation}
+    \chapter{Implementation}\label{sec:implementation}
     \input{implementation.tex}
 
-    \newpage
+    \chapter{Deployment}\label{sec:deployment}
+    \input{deployment.tex}
 
-    \section{Conclusion}\label{sec:conclusion}
+    \chapter{Conclusion}\label{sec:conclusion}
 
-    \newpage
-
-    \section{Appendices}\label{sec:appendices}
-
-    \newpage
-
-    \section{Bibliography}\label{sec:bibliography}
-
+    \chapter{References}\label{sec:bibliography}
     \bibliography{main}
     \bibliographystyle{plain}
+
+    \chapter{Appendices}\label{sec:appendices}
 
 \end{document}
