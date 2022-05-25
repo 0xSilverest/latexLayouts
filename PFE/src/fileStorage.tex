@@ -1,0 +1,30 @@
+For this second database, that is more opted to be used for the storage of files.
+The solution was already known, and was the Amazon S3 service.
+
+The file storage database was used for the following:
+
+    \begin{itemize}
+        \item Storing site configuration files
+        \item Storing client files
+    \end{itemize}
+
+The storage was pretty simple, it was just a bucket with a specific folder structure.
+So for the first case it was a folder for each site,
+and for the second it was a folder for each client which was handled with the archival
+cronjob as these files were related to the data from the trucks that have been handled
+during the day.
+
+For the tests we used the following:
+
+    \begin{itemize}
+        \item Creating a bucket
+        \item Creating a folder structure
+        \item Adding data to the bucket and finding it
+        \item Deleting data from the bucket
+        \item Deleting the bucket
+    \end{itemize}
+
+For the creation of the bucket it was made such as it's done automatically once the
+server started in case it doesn't exist.
+So that we can reproduce the same bucket that there was in the dev environment and during
+the  tests.

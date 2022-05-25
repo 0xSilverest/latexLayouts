@@ -1,31 +1,44 @@
 This already existing solution comes with its own set of problems.
 
-Beginning from the most obvious one we have at hand is the usage of different technologies in
-the backend without any advantage in place for opting to this approach, such as NodeJs and Spring
-Boot, which in the long term affects the maintainability of the solution, as reported by the CTO,
-was developed by a freelancer and went untouched since. So rather than a maintainable solution,
-they opted for a momentary solution to have a PoC.
-While it's only handling the registration process, it would be better if it just migrated to the
-same stack of the whole system. That will allow the reusability of code, as there are already
-implementations for handling the Users Database on the Spring code base, and there is really
-no purpose to separate the systems.
+Beginning from the most obvious one we have at hand is the usage of different technologies
+in the backend without any advantage in place for opting to this approach, such as NodeJs
+and Spring Boot, which in the long term affects the maintainability of the solution, as
+reported by the CTO, was developed by a freelancer and went untouched since. So rather
+than a maintainable solution, they opted for a momentary solution to have a PoC which
+could assess that the product is working as intended.
+While it's only handling the registration process, it would be better if it just migrated
+to the same stack of the whole system. That will allow the reusability of code,
+as there are already implementations for handling the Users Database on the Spring code
+base, and there is really no purpose to separate the systems.
 
-For the databases as of the current solution,
-there are already two databases put in place a MySQL database to deal with any data that relates to users,
-the other is a Redis database to deal with real-time data such as tracking truck entries etc.
-Redis being the database to deal with real-time data, but the problem with redis is that it's load everything
-in memory so it's can be overloaded with costs of having memory coming at a great expense for some data
-that won't be casually needed. So a archival system for the data, where cost of the storage comes cheaper but,
-has low throughput for reads and writes would be perfect for such usage, the archival database would only take
-daily backups as afterwards this data would mostly be used either for KPIs, and thus the Redis database would
-get cleaned on a daily basis not having extra data taking out memory.
+For the databases as of the current solution, there are already two databases put in place
+a MySQL database to deal with any data that relates to users, the other is a Redis database
+to deal with real-time data such as tracking truck entries etc. Redis being the database to
+deal with real-time data, but the problem with redis is that it's load everything in memory
+so it's can be overloaded with costs of having memory coming at a great expense for some
+data that won't be casually needed. So a archival system for the data, where cost of the
+storage comes cheaper but, has low throughput for reads and writes would be perfect for
+such usage, the archival database would only take daily backups as afterwards this data
+would mostly be used either for KPIs, and thus the Redis database would get cleaned on
+a daily basis not having extra data taking out memory.
 
-Furthermore, going through the existing code base, the secrets that relate to anything that is credentials or
-encoding keys are all exposed in the code, in terms of industrialization, it means there's a lack of security.
+The current deployment of the solution is not scalable neither seamless, as it 
+relies heavily on tasks done by hand, not some automated process.
+So the there are no tests for updating the system, pipelines for deployment, etc. Which
+means if there is a big update to the application, it would be more susceptible to
+downtime due to some bugs or other issues, that were not caught beforehand.
 
-Lastly, the current deployment of the solution is not scalable, as it's was mostly developed as a PoC,
-so the there are no heavy tests for updating the system, pipelines for deployment, etc. So if there is a
-big update to the application, it would be more susceptible to have downtime due to bugs or other issues,
-that were not caught beforehand.
+Furthermore, going through the existing code base, the secrets that relate to anything
+that is credentials or encoding keys are all exposed in the code, in terms of
+industrialization, it means there's a lack of security.
 
-% TODO: Improve on the criticism put in place
+Also, there are some issues relating to missing  unit tests,
+so the tests are not covering all the features but just some some of them,
+which is a problem for the maintainability of the code also for adding new features.
+
+Staying in the current point, which is the code base, there is a lack of documentation
+and the code is not well documented, so it's not easy to understand what is going on.
+
+Finally, some code could use some refactoring, as it's not really well organized,
+and has reused code chunks that could be made simpler if just extracted to some function 
+to be valled within the needed spots reducing the redundancy.

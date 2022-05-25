@@ -1,0 +1,17 @@
+\subsection {Adding user management system}
+
+The old system didn't have a user management system, as it relied on the site being the
+user so there wasn't really users to manage. So we had to integrate users within the system
+then add a way to manage them, and this was done by migrating the site from being the user
+to being an entity that could be managed by users who have the right to do so.
+And that required rework through the majority of the backend as this architecture was
+relied on by all the backend services and controller and also frontend.
+
+So we had to change this architecture to be able to manage users and their roles, but also
+keep the old behaviour the same.
+
+%TODO: Add class diagram before and after (Couldn't do it now because we migrated directly without using diagrams)
+
+\subsection {Implementation of tests for existing codebase}
+
+TODO: Still not touched on yet

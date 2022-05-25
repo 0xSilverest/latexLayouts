@@ -2,7 +2,7 @@
 %! Date = 26/02/2022
 
 % Preamble
-\documentclass[11pt]{book}
+\documentclass[oneside]{book}
 
 \usepackage{graphicx}
 \usepackage[paper = a4paper,
@@ -16,10 +16,13 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
+\usepackage[backend=biber,
+            style=alphabetic,
+            ]{biblatex}
+\addbibresource{main.bib}
 
 % Document
 \begin{document}
-
     \thispagestyle{empty}
 
     \begin{titlepage}
@@ -61,11 +64,19 @@
     \chapter{General Introduction}\label{sec:introduction}
     \input{general_introduction.tex}
 
-    \chapter{Context}\label{sec:context}
+    \chapter{Context and Problematic}\label{sec:context}
+
+    \section{Introduction}
     \input{introduction.tex}
 
     \section{Host organism}\label{sec:host-organization}
     \input{host_organization.tex}
+
+    \section{Work methodology}\label{sec:work-methodology}
+    \input{methodology.tex}
+
+    \section{Problematic}\label{sec:problematic}
+    \input{problematic.tex}
 
     \chapter{Assessment of current state}\label{sec:assessment-of-current-state}
     \section{Analysis}\label{sec:analysis}
@@ -77,6 +88,8 @@
     \chapter{Contributions}
     \section{Business process}\label{sec:business-process}
     \input{business_process.tex}
+
+    \newpage
 
     \section{Conceptual model}\label{sec:conceptual-model}
     \input{conceptual_model.tex}
@@ -92,10 +105,8 @@
 
     \chapter{Conclusion}\label{sec:conclusion}
 
-    \chapter{References}\label{sec:bibliography}
-    \bibliography{main}
-    \bibliographystyle{plain}
+    \printbibliography[title=References]
 
-    \chapter{Appendices}\label{sec:appendices}
+    \appendix
 
 \end{document}
