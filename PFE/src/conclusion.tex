@@ -1,0 +1,54 @@
+To summarize, during the course of the project, I have taken part in adapting an MVP
+for logistics, specifically the management of trucks and their drivers within the 
+warehouse with the organisation MMSoft, to SaaS standards and turn it to a competitive
+product within the market. The initial solution was more a proof of concept with the 
+capability for real usage, but missing the security, scalability and maintainability
+requirements. So we undertook a full-fledged project with the following goals:
+    \begin{itemize}
+        \item Implement archival capabilities to store the data in a database.
+        \item Implement security features, such as rate limiting and update the authorization system.
+        \item Migrate the product to a scalable and rigid infrastructure, with automated scaling.
+        \item Adding Continuous Integration and Continuous Delivery to multiple levels.
+        \item Refactoring the code to make it more readable and maintainable.
+    \end{itemize}
+
+The project was took up by a team of three people, handling the tasks with
+the kanban method, which had five states:
+    \begin{itemize}
+        \item Stand-by
+        \item Request
+        \item In progress
+        \item To Review
+        \item Done
+    \end{itemize}
+
+The implemetation of the project for multiple of the goals has been a success, for
+the most part. So far, the archival has been implemented within the AWS database
+DynamoDB, and S3 for the files archival. The security has took turn into moving 
+the JWT Bearer token transfer to a cookie based system, where the token is stored
+in the browser as a HTTP Only cookie, then within the same subject we had API 
+rate limiting, which was implemented using Bucket4J library within the filter layer
+of the API gateway. The infrastructure took a transfer from the EC2 instance to 
+a ECS cluster, which allows for better scalability and maintenance for the running 
+system. The CI/CD has been implemented using the Circle CI hosted service,
+with the help of quality gateways offered by Sonarqube to assess the quality of the
+code to allow it to pass or not.
+The tests have been implemented using the JUnit and Mockito libraries, and the
+implementation of the API has been done using the Spring Framework.
+For each step or task of the project, we were implementing unit tests or ensuring
+functionality of the task with manual tests, before moving it to the "To review" state
+within the kanban board.
+The reviewing of the project was done by the product owner, who is the CEO and 
+knows how exactly the product should be implemented for the clients needs.
+
+Of course, the project was not completed to a 100\% in the time allotted, so the
+limits reside currently in the scope of the performance of some endpoints 
+that rely on pulling big sets of data from the Redis Database and which is currently
+being investigated for a better implementation. The refactoring part of the project
+is still heavily in progress, as there are still many decisions to be made regarding
+the technologies to use and the way to implement them before diving into it.
+
+So for the future of the project, it would be clear that targetting the refactoring
+of the code base would be the best way to improve the project, as it would open 
+doors for easier implementation of the new features and have some significant improvement
+in the performance of some services.

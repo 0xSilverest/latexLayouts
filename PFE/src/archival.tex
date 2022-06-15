@@ -1,5 +1,4 @@
 So taking the first one, we had to study performance to cost of three solutions and their scalability:
-
     \begin{itemize}
         \item RDS (SQL)
         \item DynamoDB (NoSQL)
@@ -14,7 +13,6 @@ So we only relied on the cost of the solution, how easy is it to maintain.
 So going off by cost first Aurora was the most expensive, with no value added to the problem we'll be solving with it.
 
 So that left us with two options:
-
     \begin{itemize}
         \item RDS (SQL)
         \item DynamoDB (NoSQL)
@@ -72,7 +70,6 @@ service.
 Lastly, the only missing part was integration within the back-end which went on different steps.
 
 First we had to create a service on the Spring Back-end that took on the handling of the communication layer between the DB and the back taking on mulitple functionalities such as:
-
     \begin{itemize}
         \item Creating - delete tables
         \item Creating indexes to allow fast access to the data
@@ -82,7 +79,6 @@ First we had to create a service on the Spring Back-end that took on the handlin
 
 Then implementation of unit tests for the service to ensure that it's working as intended,
 it had taken on the following tests:
-
     \begin{itemize}
         \item Create table for tests with required indexes
         \item Adding data to table, and then finding it
@@ -98,7 +94,7 @@ dev environment. Also, getting rid of the need for manual creation of the tables
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.8\textwidth]{images/archival_backup.png} 
-    \caption{\footnotesize{Archival Cronjob}}
+    \caption{\footnotesize{Archival Cronjob - Sequence Diagram}}
     \label{fig:archival_backup}
 \end{figure}
 

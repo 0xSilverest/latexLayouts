@@ -1,29 +1,40 @@
-As of the current moment the forecast component diagram for the system is as follows:
+Before diving into the core of the implementation, let's take an overview of the 
+targetted system.
 
 \begin{figure}[!htpb]
-    \includegraphics[width=0.9\textwidth]{images/forecast}
+    \includegraphics[width=\textwidth]{images/forecast}
     \caption{\footnotesize{Forecast component diagram}}
     \label{fig:forecast}
 \end{figure}
 
-As it's shown in \ref{fig:forecast} there are additional databases that are waiting to get
+As it's shown in \ref{fig:forecast} there are additional databases that are aimed to be
 implemented mainly ones for archiving files as is the case of S3 and also archiving data
 of the trucks and drivers that could be used for statistics and KPIs down the line thus
 using DynamoDB\@.
 
-The containerization of the system to be done in the future as follows,
-first the creatoin of a docker image of the system
-then the deployment of the image to ECR
-and finally turning up ECS task to take care of the management of the system.
+With that in mind, the targetted systems database is divided into two main components:
+    \begin{itemize}
+        \item The archival database that is used to store the data of the trucks
+            and drivers.
+        \item The files database that is used to store the files that are uploaded
+            by drivers and sites.
+    \end{itemize}
 
-An addition of a deployment system such as CI/CD pipelines to be able to
-deploy the system seamlessly and in a way that is easy to use and maintain.
+The addition of a secrets manager, that is used to migrate the exposed secrets and
+credentials, to assess the security of the system.
 
-Finally, turning back to what's within the code base, is the creation of
-new model to be followed within the system and the creation of new
-componenets and features that were missing before hand, such as 
-a user management system which would allow having the proper access 
-to the system and adding some security measures to the backend is a set target
-such as the rework of authentication handling, and the rate limiting of the API
-to prevent the system from being flooded with requests.
+The removal or migration of the NodeJS backend code to a Java Backend, that could
+manage the creation of a more uniform and aligned tech stack.
 
+Also the transition to a more modern and trendy infrastructure that is based on 
+containerization of the microservices and the use of Docker. Instead of the current
+EC2 instances, which are not really required as the need to manual management and
+configuration of modules within the containers could be automated within 
+bash scripts.
+
+There's the aim for the addition of CI/CD pipelines to the system, they could be
+used to automate the deployment of the microservices and the creation of the
+Docker images. Which in turn could ease up deployment of hotfixes, during the 
+launch of new features and major updates.
+
+We'll dive into the core of the implementation next.

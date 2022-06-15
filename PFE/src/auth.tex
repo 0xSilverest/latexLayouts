@@ -13,18 +13,18 @@ which is a cookie that is only accessible through the HTTP protocol, not the Jav
 be the safest option to store the JWT. And then proceeded to embed the token within the cookie,
 as so we can avoid the possiblity of exploitation through JS injections to acquire the token.
 
+\begin{figure}[!htpb]
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/JWTHttpOnly.png}
+    \caption{\footnotesize{JWT HTTP Only Cookie - Sequence Diagram}}
+    \label{fig:token}
+\end{figure}
+
 The authentication had a simple flow \ref{fig:token}, the user presented his credentials,
 the server validated them, in case they were valid the server would generate a new access 
 token, which was embedded in the header as a HTTP Only cookie then that would make 
 all the request coming from the front end to the server to have the token in the header
 with no need for the Javascript to do any handling for that last.
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/JWTHttpOnly.png}
-    \caption{\footnotesize{JWT HTTP Only Cookie}}
-    \label{fig:token}
-\end{figure}
 
 The refresh token mechanism was to make the user experience better and also to increase
 the security of the application, make the intercepted JWT tokens mostly come in useless
@@ -35,11 +35,16 @@ of access token and refresh token, the referesh token came in handy to create a 
 token once the old one has expired and the user was still active during that session, to
 avoid forcing the user to re-login.
 
-\begin{figure}[!htbp]
+\begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.42\textwidth]{images/refresh.png}
-    \caption{\footnotesize{Refresh token}}
+    \includegraphics[width=0.5\textwidth]{images/refresh.png}
+    \caption{\footnotesize{Refresh token - Sequence Diagram}}
     \label{fig:refresh}
 \end{figure}
 
-\newpage
+The refresh token mechanism is pretty simple, once the front fails a request and gets
+error 401 not authorized, it sends a Post request to the refresh endpoint,
+the backend will check if the refresh token is available as a cookie, if it is, it will
+check if the refresh token is valid, if it is, it will generate a new access token and
+return it to the frontend embedded in the header as a HTTP Only cookie, just like in
+the authentication flow in figure \ref{fig:token}.

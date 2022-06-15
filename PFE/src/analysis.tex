@@ -1,17 +1,16 @@
-Having to take care of managing multiple trucks, truck drivers, their turns, their parking lots
-and their parking spaces can be a difficult task to achieve, especially when you have to deal with
-time management, availability, delays, and so on.
-However, going by old systems, either an Excel spreadsheet or just a ledger system on
-paper, can help such a task, as long as you're working on a small scale. But once
-this scales, the need for assistance grows.
+So as dicussed in the last section \ref{sec:business-process}, the system required a huge
+amount of functionalities with a lot of dependencies between them.
 
-And that's the point where comes the possibility to make use of automated tasks to do the job.
-Automating the management, making it easier to manage with as little human intervention
-as possible.
-
-As of the current time, there is already a solution put in place as shown in figure
+So the team came up with the services shown in the following figure
 \ref{fig:backend_services} which are hosted  on AWS implementing an SOA architecture.
 The SaaS relies on various managed services provided by AWS, such as EC2, S3, RDS, etc.
+
+\begin{figure}[!htpb]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/Backend}
+    \caption{\footnotesize{Backend services}}
+    \label{fig:backend_services}
+\end{figure}
 
 The MMSoft Saas is constituted of:
 \begin{itemize}
@@ -38,9 +37,42 @@ The MMSoft Saas is constituted of:
 
 \begin{figure}[!htpb]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/Backend}
-    \caption{\footnotesize{Backend services}}
-    \label{fig:backend_services}
+    \includegraphics[width=\textwidth]{images/State-of-art}
+    \caption{\footnotesize{Current state of the application}}
+    \label{fig:state-of-art}
 \end{figure}
 
+These following services came in the developed as illustrated
+in the following figure \ref{fig:state-of-art}
 
+It's a solution that is fully hosted on AWS services.
+Firstly the backend in hosted on EC2, which is a managed service provided by AWS for
+hosting virtual Linux machines with a lot of security features and routing capabilities
+to isolate the backend services from the rest of the network.
+
+Then the backend services are built in two technologies as discussed the last paragraph:
+    \begin{itemize}
+        \item Java 11 Spring Boot 2.6
+        \item Node JS 16
+    \end{itemize}
+
+Those services are interacting with two different databases, the first one being
+the MySQL database which holds data for users and sites.
+And the second one being Redis which is charge of all real-time data, leading to a better
+orchestrated interaction within the system.
+Also there's the MQTT broker which is used to communicate with different actors within 
+the system such as the gatekeepers, management desk and drivers.
+
+Then there are the front-end services which are based on different frameworks depending 
+on the needs of the application:
+    \begin{itemize}
+        \item Angular 11
+        \item React 16
+        \item Cermate
+    \end{itemize}
+
+For the front-end services, they are being hosted within S3 file storage, which is 
+a managed service mainly used for storing files.
+
+And all of those services represent our MVP, which is a result of multiple iterations
+of the development process.

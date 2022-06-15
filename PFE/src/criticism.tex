@@ -1,44 +1,84 @@
-This already existing solution comes with its own set of problems.
+With the general structure of the software present, it is clear that the
+software is missing some important features and building blocks that can make it 
+the SaaS it's aimed to be.
 
-Beginning from the most obvious one we have at hand is the usage of different technologies
-in the backend without any advantage in place for opting to this approach, such as NodeJs
-and Spring Boot, which in the long term affects the maintainability of the solution, as
-reported by the CTO, was developed by a freelancer and went untouched since. So rather
-than a maintainable solution, they opted for a momentary solution to have a PoC which
-could assess that the product is working as intended.
-While it's only handling the registration process, it would be better if it just migrated
-to the same stack of the whole system. That will allow the reusability of code,
-as there are already implementations for handling the Users Database on the Spring code
-base, and there is really no purpose to separate the systems.
+To start with the essentials, as the software is targeted to be used for logistics
+within factories and warehouses, it's important for the data of daily interactions and
+operations to be stored in a database and be accessible to analytics and KPI's operations
+to be able to provide a better understanding of their efficiency and how their
+work is flowing. Because for the mean time, all the daily operations data is being stored
+in the Redis database and Redis being an in-memory data structure store used as a database,
+message broker, and streaming engine \cite{redis_def} it won't be suited for long term storage
+as to keep it operational it will need to clear old data and free up space, thus why it's cleared
+on a daily to weekly basis. And with no archival solution put in place, the data for now is
+cleared then lost which means for any client opting to pull their old data for analytics
+won't be possible.
 
-For the databases as of the current solution, there are already two databases put in place
-a MySQL database to deal with any data that relates to users, the other is a Redis database
-to deal with real-time data such as tracking truck entries etc. Redis being the database to
-deal with real-time data, but the problem with redis is that it's load everything in memory
-so it's can be overloaded with costs of having memory coming at a great expense for some
-data that won't be casually needed. So a archival system for the data, where cost of the
-storage comes cheaper but, has low throughput for reads and writes would be perfect for
-such usage, the archival database would only take daily backups as afterwards this data
-would mostly be used either for KPIs, and thus the Redis database would get cleaned on
-a daily basis not having extra data taking out memory.
+Next comes the user management system, which is clearly a key factor in such a workflow, 
+as seen in the \ref{fig:flowchart} there are multiple actors involved in the process,
+from the gate keepers, operators, drivers, and the management staff. So with the current
+user system which opts to have user set as a site which means for each factory there's a
+single user or even though you can make multiple users they all will have full permission
+in the site's scope which isn't secure neither is a good idea. So opting to a new system
+which encourages the use of a role system for users and the users then belonging to a site
+would be a better solution, as it would even open the flexibiltiy of adding configuration
+to the user roles, and have each user have their own scope of permissions depending on
+their role.
 
-The current deployment of the solution is not scalable neither seamless, as it 
-relies heavily on tasks done by hand, not some automated process.
-So the there are no tests for updating the system, pipelines for deployment, etc. Which
-means if there is a big update to the application, it would be more susceptible to
-downtime due to some bugs or other issues, that were not caught beforehand.
+Also for the authentication, the current system uses a Bearer token which is a Json Web
+Token (JWT) and that is permanent rather than an ephemeral one. So if an attacker manages
+to intercept a token, which in fact is doable with code injections to expose a request,
+then they can use it to access the backend at any time.
+Opting to some other authentication system, such as a cookie based system, would be more
+secure, as the cookies could at least be held in a secure place such as code injections,
+can be used to acquire them from the front-end.
 
-Furthermore, going through the existing code base, the secrets that relate to anything
-that is credentials or encoding keys are all exposed in the code, in terms of
-industrialization, it means there's a lack of security.
+Looking at the current system and how the deployment is done, which is done in a manual way,
+so it's takes more time to deploy simple bug fixes and new features reducing from the efficiency
+of the developers, due to the time it takes to deploy each time. For fact, it's clear that
+the addition of some automized deployment tools would be a good way reduce the need for the
+manual deployment and also allow for faster deployment of new features and hot-fixes as the
+deployment process is mostly a recurrent set of actions.
 
-Also, there are some issues relating to missing  unit tests,
-so the tests are not covering all the features but just some some of them,
-which is a problem for the maintainability of the code also for adding new features.
+Next comes the code quality, which is rather messy, as it uses a lot of different tools,
+some part are just redundant which could be done in a DRY\footnote{DRY or don't repeat
+yourself is a term used to describe the practice of writing code that is not repetitive.
+It is a way to reduce the amount of code that needs to be written.\cite{pragmatic_bro}} way,
+not to the extreme of course where the code is becoming DRY but in expense of readability
+and complexity. Other than the redundancy of some parts, the use of different approaches
+in the code can get kind of messy and hard to maintain, especially if you're not familiar
+with the code which would be the case in the expansion of the team, so the more the code
+is unified the better. Also the code is not documented, so it's not clear what some parts
+of the code internals do when it's something complex and that requires a modification.
+The tests for the majority of the code are not put in place, so in the case of huge update
+to the code, it would not be possible if some behaviour changed or if some parts are just 
+not working.
 
-Staying in the current point, which is the code base, there is a lack of documentation
-and the code is not well documented, so it's not easy to understand what is going on.
+There's the usage of different tech stacks which are NodeJS and Java Spring, which is a bit
+of a mess, as it's not clear why the NodeJS is being used in the backend without much impact
+as it's just handling some simple backend logic that could migrated to a Java Virtual
+Machine(JVM)\footnote{JVM is the virtual machine that's capable of running Java binary
+code}, compatible language such as Java, Kotlin, Scala, \dots, why I said a JVM compatible
+language it's because the majority of the system is built on Java so it would make it
+easier to migrate Js to Java than let's say moving the Java to NodeJS, but also to gain
+the advantages of strongly typed language making it easier to pick up bugs. With such a
+move, it would create a more uniform and rigid way to have the whole project fully handled
+with single build tool, which in turn can really ease up the deployment process, and make
+it automatable more easily.
 
-Finally, some code could use some refactoring, as it's not really well organized,
-and has reused code chunks that could be made simpler if just extracted to some function 
-to be valled within the needed spots reducing the redundancy.
+One other point to tackle is security within the code, the current code base uses secrets
+which are stored directly in the code, which is not secure, as you can easily acquire the
+original code through a decompiling tool, or even through a reverse engineering tools,
+which would make those secrets attainable directly. Opting for some other way of storing
+the secrets, such as a database in addition with environment variables, would probably be
+a better solution, in addition with a rolling system of secrets in possible cases making
+those keys temporary.
+
+\section{Conclusion}
+
+To summarize the current state of the software, it's clear that the current application
+is at in terms of the features and the current state of the code, it's clear that there's
+a strong foundation for the application to be a SaaS as it's already handling almost the
+full workflow of the fleet management system, , but there are some missing features and
+building blocks specifically in the infrastructure and security aspects, which could be
+mediated to complete the organization view of their product.

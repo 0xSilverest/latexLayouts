@@ -9,6 +9,21 @@ The file storage database was used for the following:
     \end{itemize}
 
 The storage was pretty simple, it was just a bucket with a specific folder structure.
+
+For the site configuration files, the structure was as follows \texttt{/config/site/<site-id>/<filetype>}.
+The file type matched the existing configuration files, which are:
+
+    \begin{itemize}
+        \item \texttt{RGPD.pdf}
+        \item \texttt{Security rules.pdf}
+        \item \texttt{Plan.pdf}
+    \end{itemize}
+
+For the user files, the structure was as follows \texttt{/user/<site-id>/<user-id>/<fileName>}.
+File name in this case was an auto generated UUID as those file were the files, uploaded
+by the drivers and didn't need to have specific names other than being able to find
+them in the structure.
+
 So for the first case it was a folder for each site,
 and for the second it was a folder for each client which was handled with the archival
 cronjob as these files were related to the data from the trucks that have been handled
@@ -27,4 +42,13 @@ For the tests we used the following:
 For the creation of the bucket it was made such as it's done automatically once the
 server started in case it doesn't exist.
 So that we can reproduce the same bucket that there was in the dev environment and during
-the  tests.
+the tests.
+
+Once all the bindings done and tested, it was time to setup controllers and services,
+which were used for the following:
+
+    \begin{itemize}
+        \item Service for interacting with the client database
+        \item Service for interacting with the site configuration database
+        \item Controllers to setup buffers for downloading and uploading files
+    \end{itemize}

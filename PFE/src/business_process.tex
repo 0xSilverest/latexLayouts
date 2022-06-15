@@ -3,19 +3,18 @@ In the goal of have their workflow optimized.
 
 And it goes as follows:
 
-\begin{figure}[!htpb]
+\begin{sidewaysfigure}[!htpb]
     \centering
     \includegraphics[width=1\textwidth]{images/flowchart}
     \caption{\footnotesize{Business process flowchat}}
     \label{fig:flowchart}
-\end{figure}
+\end{sidewaysfigure}
 
 To give more context to the diagram above, we will dive into the details of it processes.
 
 So first of all we have the following core processes:
-
 \begin{itemize}
-    \item Welcome of the driver
+    \item Kiosk for drivers access to the warehouses and factories
     \item Digitalization of documents
     \item Secure access to logistics platform
     \item Dashboard for the management
@@ -37,26 +36,12 @@ the driver by sms or through the application, once the driver accesses the platf
 by his arrival.
 
 Finally, the dashboard for the management is the main interface for the management and it's divided into multiple
-workspaces depending on the role and priveledges of the user depending on the needs of the clients.
+workspaces depending on the role and priveleges of the user depending on the needs of the clients.
 
-As of the current time, the application is as follows:
-
-\begin{figure}[!htpb]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/State-of-art}
-    \caption{\footnotesize{Current state of the application}}
-    \label{fig:state-of-art}
-\end{figure}
-
-So it's built with different technologies for the front depending on the platform or device
-that is handling it, and for the backend it's handled mainly in Spring and NodeJs, for
-the database it's handled for the realtime data with Redis, and for the user data it's 
-handled in RDS MySQL database, for everything that is related to handling notifications
-it's done through the MQTT broker and Google Firebase service.
-
-The Spring application is handling everything from the user data, managemenet of the sites,
-the trucks and drivers, the geolocation, the notification mapping, the realtime data
-handling.
-
-
+And to tackle this business process came the creation of a complex system that offers 
+multiple functionalities to the management, real-time monitoring of the trucks,
+the management can see the status of the trucks, the status of the drivers,
+the status of the documents, a notification system that interacts with multiple devices,
+a guiding system for the drivers, \dots
+And all of this requires specific orchestration and automation of the processes.
 

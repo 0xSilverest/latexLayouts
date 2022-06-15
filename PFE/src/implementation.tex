@@ -1,4 +1,50 @@
-\section {Databases}
+For the contributions, we had multiple subjects and points within the solution touched on,
+which as follow:
+\begin{itemize}
+    \item Persistence Layer: Which took interest in the implementation of an archival 
+        system for the solution, it went in two different ways:
+        \begin{itemize}
+            \item Implementing the archival for general data that was in JSON format.
+            \item Implementing the archival for data that was binary files such as PDFs.
+        \end{itemize}
+    \item Security Layer: It was the part where we implemented a new filter to the backend,
+        specifically for limiting the call backs to the API, through a rate limiter.
+        And next was the authentication, which was a migration from a simple Bearer token
+        transactional method to a more secure method based on Http Only Cookies storage for
+        the token.
+    \item Infrastructure: This part mainly targetted, migrating the environment from linux
+        virtual machines to managed containers that could offer a better scalability,
+        in terms of managing peak load for requests and memory usage.
+    \item Continuous integration: Here we implemented a CI/CD pipeline for the solution,
+        which took advantage of the previously implemented containerized environment.
+        To make the deployment more streamlined and efficient, to allow for easier hot
+        fixes and upgrades, and force a better testing of the solution before allowing 
+        code to be deployed in an automated fashion.
+    \item Refactoring: This was the last point, where the main goal here is to make
+        the code more readable and easier to maintain. The trade off is that it will
+        take a long time to implement as it requires implementation of a lot of tests
+        for the old code. To allow for the beginning of the re-implementation of the
+        code, to a newer version that relies on a different architecture.
+\end{itemize}
+
+\newpage
+
+\section{Introduction}
+
+So with the context, the problematic and the scope of the project setup, it's 
+time to pass to the contributions phase, which consists of conceptual contributions
+and their implementation. To be more precise, we'll be handling persistence layer,
+security layer, the infrastructure layer and a new deployment strategy.
+
+For each of these layers and phases, we'll be starting with a conceptual or theoretic
+study of the solutions we have, and then we'll be talking about the implementation 
+projecting it to the project to finally move to the testing and how it was done to validate
+the solution used.
+
+\section{Target}\label{sec:target-comp}
+\input{target_comp.tex}
+
+\section {Persistence layer}
 
 For the database we had two subjects to study:
 \begin{itemize}
@@ -14,7 +60,7 @@ For the database we had two subjects to study:
 
 \section {Security and Authentication}
 
-\subsection {Ratelimiting}
+\subsection {Ratelimiting} \label{subsec:ratelimiting}
 \input{ratelimiting.tex}
 
 \subsection {Authentication}
@@ -23,5 +69,21 @@ For the database we had two subjects to study:
 \section {Containerization and Deployment}
 \input{containerization.tex}
 
-\section {Refactoring and Improvements}
+\section {Continuous Integration}
+\input{ci.tex}
+
+\section {Refactoring and Improvements}\label{sec:refactoring}
 \input{refactoring.tex}
+
+\section {Conclusion}
+
+To conclude, during the implementation of the subjects, we had implemented a lot of
+new features and improvements ranging from databases and security, to infrastructure 
+and deployment.
+As we've seen during the last section \ref{sec:refactoring}, the refactoring wasn't 
+implemented yet, but the main goal of this phase has been discussed in such a way
+that it will be easier to implement the refactoring in the future.
+The main goal of this contributions phase was to make the ground work for a more rigid
+and upgradable solution, which would allow for the development of a more robust and
+upgradable solution once the refactoring is fully implemented.
+

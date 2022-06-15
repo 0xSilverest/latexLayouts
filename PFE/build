@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd src
-pdflatex -halt-on-error -output-directory=../out/ -jobname=rapport main.tex
+cp src/main.bib out/
+cd out/
+biber report
+cd ../src/
+lualatex -halt-on-error -output-directory=../out/ -jobname=report main.tex
 cd ..
-

@@ -1,111 +1,240 @@
-%! Author = Metougui Taha
-%! Date = 26/02/2022
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+\documentclass[12pt, a4paper, titlepage]{book}
 
-% Preamble
-\documentclass[oneside]{book}
-
+\AtBeginDocument{\usepackage{arabluatex}}
+\usepackage{tgtermes}
 \usepackage{graphicx}
+\usepackage{xpatch}
 \usepackage[paper = a4paper,
 			twoside,
-			bindingoffset = 2mm,
-			hmargin = 25mm,
-			vmargin = 25mm,
+			bindingoffset = 2mm, hmargin = 15mm,
+			vmargin = 15mm,
+            heightrounded,
 			dvipdfm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{fontspec}
 \usepackage[hidelinks]{hyperref}
-\usepackage{fancyhdr}
 \usepackage{amsmath}
+\usepackage{rotating}
+\usepackage{afterpage}
+\usepackage[nottoc]{tocbibind}
 \usepackage[backend=biber,
             style=alphabetic,
             ]{biblatex}
 \addbibresource{main.bib}
 
+\usepackage{titlesec, blindtext, color}
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+\usepackage[myheadings]{fullpage}
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+
+\setmainfont[Ligatures=TeX,Script=Arabic]{DejaVu Sans}
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{\clearpage{\pagestyle{empty}\origdoublepage}}
+\let\cleardoublepage\clearemptydoublepage
+
+\providecommand{\keywords}[1]
+{
+  \small	
+  \textbf{\textit{Keywords-}} #1
+}
+
+\providecommand{\motcles}[1]
+{
+  \small	
+  \textbf{\textit{Mots cl\'es-}} #1
+}
+
+\providecommand{\kalimat}[1]
+{
+  \small	
+  \textbf{\textit{\arb{alkalmAt almiftA.hiyaT}-}} #1
+}
+
+\usepackage{etoolbox}
+
 % Document
 \begin{document}
-    \thispagestyle{empty}
+    \afterpage{\clearpage}
+    \setlength{\parskip}{5pt}
+    \setlength\itemsep{1em}
 
     \begin{titlepage}
+    \newgeometry{top=0.5in,bottom=0.5in,right=1in,left=1in}
+    \thispagestyle{empty}
         \begin{center}
-            \includegraphics[width=150px]{images/logoEnsa}
+            \includegraphics[width=100pt]{images/logoEnsa}
 
-            \vspace*{2cm}
+            \LARGE{
+                \textbf{Graduation Project Thesis}
+            }
+
+            \vspace*{0.6cm}
+
+            \normalsize{For acquiring the degree}
+
+            \vspace*{0.4cm}
+
+            \Large
+            \textbf{State Engineer}
+
+            \vspace*{0.5cm}
+
+            \large
+            \textbf{Computer Science}
+
+            \vspace*{0.6cm}
+
+            \normalsize{Class 2021 - 2022}
+
+            \vspace*{1.2cm}
+
+            \hrule
+
+            \vspace*{0.6cm}
 
             \Large
             \textbf{Implementation of industrial standards on a SaaS for an MVP for logistics}
 
-            \vspace{0.5cm}
-            \large
-            \textbf{Metougui Taha}
+            \vspace*{0.6cm}
 
-            \vspace{1.5 cm}
+            \hrule
 
-            \textbf{Supervised by:}\\
-            \vspace{0.5cm}
-            \textbf{Pr. Zineb BESRI}\\
-            \vspace{0.5cm}
-            \textbf{Mr. Othman DARRAZ}
+            \vspace*{-0.5cm}
 
-            \vspace{0.8 cm}
+            \includegraphics[width=125pt]{images/logo}
+
+            \vspace*{-0.5cm}
+
+            \Large
+            \textbf{M. Metougui Taha}
+
+            \vspace{0.5 cm}
+
+            \large{presented the 25th of June 2022}
+
+            \vspace{0.5 cm}
         \end{center}
+        \raggedright
+        \Large
+        \textbf{Jury members:}
+
+        \vspace{0.5 cm}
+
+        \normalsize
+        M. Darraz Othman      \hfill Company Supervisor
+
+        Ms. Besri Zineb       \hfill Ensat\'e Supervisor
+
+        M. Medouri Abdellatif \hfill Ensat\'e Professor (President)
+
+        M. Bentajer Ahmed \hfill Ensat\'e Professor (Examiner)
+
+        \vspace{1cm}
+
+        \centering
+        Academic year: 2021-2022
     \end{titlepage}
 
     \frontmatter
 
-    \chapter*{Abstract}
+    \thispagestyle{plain}
+    \begin{center}
+        \vspace{0.9cm}
+        \Huge
+        \textbf{Acknowledgements}
+    \end{center}
+    \input{acknowledgements.tex}
 
-    \chapter*{Acronyms}\label{sec:acronyms}
-    \input{acronyms.tex}
+    \afterpage{
+        \newgeometry{top=0.2in,bottom=1in,right=1in,left=1in}
+        \chapter{Abstract}\label{ch:abstract}
+        \input{abstract.tex}
 
-    \tableofcontents
+        \newpage
+        \begingroup
+        \let\cleardoublepage\relax
+        \chapter*{R\'esum\'e}\label{ch:resume}
+        \input{resume.tex}
+        \endgroup
+        
+        \newpage
+        \begingroup
+        \let\cleardoublepage\relax
+        \setRL
+        \chapter{\arb{mulaxa.s}}\label{ch:molakhas}
+        \setLR
+        \input{molakhas.tex}
+        \endgroup
+    }
 
+    \afterpage{
+        \newgeometry{top=0.75in,bottom=1in,right=1in,left=1in}
+        \chapter{Acronyms}\label{ch:acronyms}
+        \input{acronyms.tex}
+        \begingroup
+        \let\cleardoublepage\relax
+        \listoffigures
+
+        \listoftables
+        \endgroup
+
+        \tableofcontents
+        \clearpage
+        \restoregeometry
+    }
+    
     \mainmatter
 
     \chapter{General Introduction}\label{sec:introduction}
     \input{general_introduction.tex}
 
     \chapter{Context and Problematic}\label{sec:context}
+    \input{context_res.tex}
 
-    \section{Introduction}
+    \section{Introduction}\label{sec:context_intro}
     \input{introduction.tex}
 
     \section{Host organism}\label{sec:host-organization}
     \input{host_organization.tex}
 
-    \section{Work methodology}\label{sec:work-methodology}
-    \input{methodology.tex}
-
     \section{Problematic}\label{sec:problematic}
     \input{problematic.tex}
 
-    \chapter{Assessment of current state}\label{sec:assessment-of-current-state}
-    \section{Analysis}\label{sec:analysis}
+    \section{Work methodology}\label{sec:work-methodology}
+    \input{methodology.tex}
+
+    \chapter{Assessment of the current state}\label{sec:current_state}
+    \input{current_state_res.tex}
+    \section{Analysis of the solution}\label{sec:assessment-of-current-state}
+    \subsection{Assessment of current Business process}\label{sec:business-process}
+    \input{business_process.tex}
+
+    \subsection{Provided services}\label{sec:analysis}
     \input{analysis.tex}
+
+    \subsection{Conceptual model}\label{sec:conceptual-model}
+    \input{conceptual_model.tex}
 
     \section{Criticism}\label{sec:criticism}
     \input{criticism.tex}
 
-    \chapter{Contributions}
-    \section{Business process}\label{sec:business-process}
-    \input{business_process.tex}
-
-    \newpage
-
-    \section{Conceptual model}\label{sec:conceptual-model}
-    \input{conceptual_model.tex}
-
-    \section{Target}\label{sec:target-comp}
-    \input{target_comp.tex}
-
-    \chapter{Implementation}\label{sec:implementation}
+    \chapter{Our contributions}\label{sec:implementation}
     \input{implementation.tex}
 
-    \chapter{Deployment}\label{sec:deployment}
-    \input{deployment.tex}
+    \chapter{Simulation}\label{sec:simulation}
+    \input{simulation.tex}
 
-    \chapter{Conclusion}\label{sec:conclusion}
+    \chapter{General Conclusion}\label{sec:conclusion}
+    \input{conclusion.tex}
+
+    \backmatter
 
     \printbibliography[title=References]
+    \addcontentsline{toc}{chapter}{Bibliography}
 
     \appendix
 
