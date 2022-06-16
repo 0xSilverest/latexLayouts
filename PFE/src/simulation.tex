@@ -1,5 +1,17 @@
+\section{introduction}
+
 In this chapter we'll have a brief showcase of the project, and where the modules
 I've been working on are located within.
+
+We'll start by describing the interface, and explain where the modules implemented
+have been used in the goal of showcasing the seamlessness of the usage and 
+how it eases up the complexity that exists in the back-end.
+
+Some modules won't be showcased as they are not part of my implementation, and 
+some won't be shown as they are kind of heavy on the back-end and impossible to
+show unless you get a look at the code.
+
+\section{Easy Truck In(ETI) in action}
 
 Firstly we'll have a brief look at the East Truck In (ETI) interface, which is 
 the main interface for the project. We'll specifically look into the user management
@@ -8,7 +20,7 @@ aspect.
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=\textwidth]{images/login too much attempts}
-    \caption{Login requests stopped after too much attempts}
+    \caption{\footnotesize{Login requests stopped after too much attempts}}
     \label{fig:login_req_ratelimit}
 \end{figure}
 
@@ -25,7 +37,7 @@ to use system.
     \centering
     \includegraphics[width=0.49\textwidth]{images/user management}\hfill
     \includegraphics[width=0.49\textwidth]{images/userLessRoles}
-    \caption{ETI Main Page}
+    \caption{\footnotesize{ETI Main Page}}
     \label{fig:user_management_view}
 \end{figure}
 
@@ -50,7 +62,7 @@ From creating a new user to deleting a user, and they are related to the site.
     \includegraphics[width=0.49\textwidth]{images/insertingANewUser}
     \hfill
     \includegraphics[width=0.49\textwidth]{images/password}
-    \caption{Adding a new user}
+    \caption{\footnotesize{Adding a new user}}
     \label{fig:insert_user}
 \end{figure}
 
@@ -60,7 +72,7 @@ a new user to the system. Giving power to control his roles and workspaces.
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=\textwidth]{images/accManager}
-    \caption{Account Manager}
+    \caption{\footnotesize{Account Manager}}
     \label{fig:accManager}
 \end{figure}
 
@@ -78,3 +90,16 @@ As for the rest of the workspaces their business logic is mostly for the fleet m
 and wasn't in the scope of my implementation except for creating roles for those workspaces
 to be accessible.
 
+\section{Conclusion}
+
+To conclude, this was a showcase of the user management module and the API rate limiting
+part, for the user management it was quite a clear and easy to use interface that hides
+all the complexity of the data structures within and makes good use of the API callbacks.
+For the API ratelimiting we've just shown the basic idea of log in attempts, and how it
+got stopped once the limit was reached, and it's the same for API rate limiting on other
+endpoints but just in a different number of possible calls.
+
+For the rest of the contributions, specifically the Containeraization and deployment
+it's just a pure infrastructure logic, and improvement. So couldn't really get a way
+to showcase it in a simplified way and also it's not important for the end user to
+get interacting with these points.
